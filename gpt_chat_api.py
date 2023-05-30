@@ -13,14 +13,19 @@ Product: PyCharm
 __author__ = "qinlinjian"
 __version__ = "1.0.0"
 import openai
+import yaml
+#
+# proxies = {
+#       "http": "http://gpt.gptpoint.online:8080",
+#       "https": "http://gpt.gptpoint.online:8080",
+#     }
 
-proxies = {
-      "http": "http://gpt.gptpoint.online:8080",
-      "https": "http://gpt.gptpoint.online:8080",
-    }
-
-openai.api_key = "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"
-openai.proxy = proxies
+api_key = ""
+with open('config.yaml', 'r') as file:
+    data = yaml.safe_load(file)
+    api_key = data["api_key"]
+openai.api_key = api_key
+# openai.proxy = proxies
 # 设置对话历史
 conversation_history = [
     {"role": "system", "content": "你是一个知识问答助手，帮助用户回答各种问题，回答需要简洁地、有效地。"},
